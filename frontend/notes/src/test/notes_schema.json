@@ -1,0 +1,21 @@
+{
+    notes: 
+    [
+        {
+            id:'',
+            accessKey:'sway-notes',
+            // vecor_id:
+            title:'',
+            url:'',
+            content:'',
+            summary:'',
+            tags:['','',''],
+            domain:'',
+            createdAt:'',
+            updatedAt:'',
+            keywords:['','',''],
+            sourceType:'',
+            isArchived:false,
+        },
+    ]
+}
