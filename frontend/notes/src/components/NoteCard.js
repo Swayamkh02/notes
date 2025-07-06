@@ -51,7 +51,7 @@ export default function NoteCard({ note }) {
           useFlexGap
         >
           {note.tags.map((tag) => (
-            <Chip key={tag} label={tag} size="small" />
+            <Chip key={tag} label={tag} size="small" color="primary" variant="outlined"/>
           ))}
         </Stack>
 
@@ -99,6 +99,7 @@ export default function NoteCard({ note }) {
             target="_blank"
             size="small"
             sx={{ ml: 1 }}
+            color="primary"
             >
             <LaunchIcon />
         </IconButton>
@@ -126,13 +127,16 @@ export default function NoteCard({ note }) {
             </Box>
           </Typography>
           <Typography variant="body2" gutterBottom>
-            <strong>Keywords:</strong> {note.keywords ?
-            note.keywords.map((tag) => (
-                <Chip key={tag} label={tag} size="small" />
-            ))
-            :
-            "None"
-            }
+            <strong>Keywords:</strong>{' '}
+            {note.keywords && note.keywords.length > 0 ? (
+              <Box component="span" sx={{ display: 'inline-flex', flexWrap: 'wrap', gap: 0.5, ml: 1 }}>
+                {note.keywords.map((tag) => (
+                  <Chip key={tag} label={tag} size="small" color="primary"/>
+                ))}
+              </Box>
+            ) : (
+              'None'
+            )}
           </Typography>
           <Typography variant="body2" gutterBottom>
             <strong>Source:</strong> {note.sourceType}

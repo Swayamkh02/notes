@@ -144,14 +144,14 @@ export default function NoteFormManual() {
           <Button onClick={() => handleAdd("tags", tagInput, setTagInput)}>Add</Button>
         </Stack>
         <Stack direction="row" spacing={1} flexWrap="wrap">
-          {form.tags.map(t => <Chip key={t} label={t} onDelete={()=>setForm({...form, tags:form.tags.filter(x=>x!==t)})}/>)}
+          {form.tags.map(t => <Chip key={t} label={t} color='primary' variant='outlined' onDelete={()=>setForm({...form, tags:form.tags.filter(x=>x!==t)})}/>)}
         </Stack>
         <Stack direction="row" spacing={1} alignItems="center">
           <TextField label="Add Keyword" size="small" value={kwInput} onChange={e => setKwInput(e.target.value)}/>
           <Button onClick={() => handleAdd("keywords", kwInput, setKwInput)}>Add</Button>
         </Stack>
         <Stack direction="row" spacing={1} flexWrap="wrap">
-          {form.keywords.map(k => <Chip key={k} label={k} onDelete={()=>setForm({...form, keywords:form.keywords.filter(x=>x!==k)})}/>)}
+          {form.keywords.map(k => <Chip key={k} label={k} color='primary' variant='outlined' onDelete={()=>setForm({...form, keywords:form.keywords.filter(x=>x!==k)})}/>)}
         </Stack>
         <Button variant="contained" type="submit">Save</Button>
       </Stack>

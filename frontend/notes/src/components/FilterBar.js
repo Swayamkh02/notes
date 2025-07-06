@@ -194,6 +194,7 @@ function FilterBar({ filters, onChange }) {
                   label={tag}
                   onDelete={() => handleDelete(tag)}
                   sx={{ m: 0.5 }}
+                  color='primary'
                 />
               ))}
               <InputBase
@@ -203,6 +204,7 @@ function FilterBar({ filters, onChange }) {
                 onChange={(e) =>
                   onChange({ ...filters, tagInput: e.target.value })
                 }
+                
                 onKeyDown={handleKeyDown}
               />
             </Box>
