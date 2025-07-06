@@ -20,7 +20,21 @@ export default function NoteCard({ note }) {
   const [expanded, setExpanded] = useState(false);
 
   return (
-    <Card variant="outlined" sx={{ borderRadius: 3, width: "100%" }}>
+    <Card variant="outlined" sx={{ 
+      borderRadius: 3, 
+      width: "100%" ,
+      '&::-webkit-scrollbar': {
+        height: 4,
+      },
+      '&::-webkit-scrollbar-thumb': {
+        backgroundColor: '#ccc',
+        borderRadius: 4,
+      },
+      '&::-webkit-scrollbar-thumb:hover': {
+        backgroundColor: '#aaa',
+      },
+      
+      }}>
       <CardContent>
         <Typography variant="h6" gutterBottom>
           {note.title}
@@ -29,7 +43,13 @@ export default function NoteCard({ note }) {
           {note.domain}
         </Typography>
 
-        <Stack direction="row" spacing={1} mt={1} flexWrap="wrap">
+        <Stack
+          direction="row"
+          spacing={1}
+          mt={1}
+          flexWrap="wrap"
+          useFlexGap
+        >
           {note.tags.map((tag) => (
             <Chip key={tag} label={tag} size="small" />
           ))}
@@ -48,7 +68,18 @@ export default function NoteCard({ note }) {
             whiteSpace: "normal"
           }}
         >
-          <Typography variant="body2" color="text.primary">
+          <Typography variant="body2" color="text.primary" sx={{
+            '&::-webkit-scrollbar': {
+              height: 4,
+            },
+            '&::-webkit-scrollbar-thumb': {
+              backgroundColor: '#ccc',
+              borderRadius: 4,
+            },
+            '&::-webkit-scrollbar-thumb:hover': {
+              backgroundColor: '#aaa',
+            },
+          }}>
             <strong>Summary:</strong> {note.summary || "No summary available."}
           </Typography>
         </Box>

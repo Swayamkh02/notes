@@ -15,6 +15,8 @@ import {
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import TipsAndUpdatesTwoToneIcon from '@mui/icons-material/TipsAndUpdatesTwoTone';
+import CloseIcon from '@mui/icons-material/Close';
+
 import { Link } from 'react-router-dom';
 
 export default function ResponsiveNavbar() {
@@ -88,20 +90,34 @@ export default function ResponsiveNavbar() {
 
       {/* Drawer for mobile nav */}
       <Drawer anchor="right" open={drawerOpen} onClose={toggleDrawer(false)}>
-        <List sx={{ width: 200 }}>
-          {navItems.map((item) => (
-            <ListItem
-              button
-              key={item.text}
-              component={Link}
-              to={item.to}
-              onClick={toggleDrawer(false)}
-            >
-              <ListItemText primary={item.text} />
-            </ListItem>
-          ))}
-        </List>
+        <Box sx={{ width: 250, display: 'flex', flexDirection: 'column' }}>
+          {/* Close Button */}
+          <Box sx={{ display: 'flex', justifyContent: 'flex-end', p: 2 }}>
+            <IconButton onClick={toggleDrawer(false)} aria-label="close">
+              <CloseIcon />
+            </IconButton>
+          </Box>
+
+          {/* Navigation List */}
+          <List>
+            {navItems.map((item) => (
+              <ListItem
+                button
+                key={item.text}
+                component={Link}
+                to={item.to}
+                onClick={toggleDrawer(false)}
+              >
+                <ListItemText
+                  primary={item.text}
+                  primaryTypographyProps={{ color: 'text.primary' }}
+                />
+              </ListItem>
+            ))}
+          </List>
+        </Box>
       </Drawer>
+
 
       
     </>

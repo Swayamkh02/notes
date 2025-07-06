@@ -31,6 +31,23 @@ def generate_note():
         print("[ERROR]", e)
         return jsonify({"error": str(e)}), 500
 
+
+@app.route("/api/get-text-embedding", methods=["POST"])
+def generate_embedding():
+    data = request.get_json()
+    text = data.get("text")
+
+    if not text:
+        return jsonify({"error": "Missing URL"}), 400
+
+    try:
+        print("[INFO] Processing Embedding")
+        emb = get_embedding_from_text(text)
+        return jsonify({'embedding':emb}), 200
+    except Exception as e:
+        print("[ERROR]", e)
+        return jsonify({"error": str(e)}), 500
+
 # if __name__ == "__main__":
 #     app.run(debug=True, port=5500)
 
