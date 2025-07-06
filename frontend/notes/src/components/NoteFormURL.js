@@ -16,12 +16,37 @@ export default function NoteFormURL() {
     }
   }
 
+  const saveToVdb = async (data) => {
+    const url = 'https://in03-efc7c2dbf19000e.serverless.gcp-us-west1.cloud.zilliz.com/v2/vectordb/entities/insert';
+    const options = {
+      method: 'POST',
+      headers: {
+        Authorization: 'Bearer 719260240d93570d9a4ff798c1b33d1c594dffc46dbc26950118633178178ca7cd0f85c9687927f1148a5e63ed892123da342f37',
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data),
+      // '{"collectionName":"notes","data":[{"summary":"","tags":["","",""],"vector":[]}'
+    };
+
+      try {
+        const response = await fetch(url, options);
+        const result = await response.json();
+        console.log("[VDB RESPONSE]", result);
+        console.log("✅ VDB insert ID:", result?.data?.insertIds?.[0]);
+        return result?.data?.insertIds?.[0] ?? null;
+      } catch (error) {
+        console.error(error);
+        return null;
+      }
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!url) return;
     setLoading(true);
     try {
-      const res = await fetch("http://localhost:5500/api/notes/from-url", {
+      const res = await fetch("https://notes-4y9f.onrender.com/api/notes/from-url", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ url }),
@@ -32,12 +57,17 @@ export default function NoteFormURL() {
         throw new Error(data.error);
       }
       else{
-        // vec_id = 
+        const vdata = {
+          "collectionName":"notes",
+          "data":[{"summary":data.summary,"tags":data.tags,"title":data.title,"vector":data.embedding}]
+        }
+        const vec_id = await saveToVdb(vdata);
+        console.log(vec_id);
         addDoc(collection(db, "notes"), {
           ...data,
           domain: extractDomain(url),
           url:url,
-          // vectorID:vec_id,
+          vectorDatabseID:vec_id,
           isArchived:false,
           createdAt: serverTimestamp(),
           updatedAt: serverTimestamp()
@@ -45,6 +75,7 @@ export default function NoteFormURL() {
         setUrl("");
       }
     } catch (err) {
+      alert("Unable to add url, please try again later!");
       console.error(err);
     }
     setLoading(false);

@@ -1,11 +1,21 @@
+import { useEffect } from "react";
 import { BrowserRouter } from "react-router-dom";
-// import routes from "./routes";
 import AppRoutes from "./routes";
 
 export default function App() {
-  return <BrowserRouter>
-    <AppRoutes />
-  </BrowserRouter>;
+  useEffect(() => {
+    // Replace with your actual deployed backend URL
+    fetch("https://notes-4y9f.onrender.com/")
+      .then(res => res.json())
+      .then(data => console.log("✅ Backend warm-up:", data))
+      .catch(err => console.error("❌ Backend wake-up failed:", err));
+  }, []);
+
+  return (
+    <BrowserRouter>
+      <AppRoutes />
+    </BrowserRouter>
+  );
 }
 
 // // import { BrowserRouter } from "react-router-dom";
