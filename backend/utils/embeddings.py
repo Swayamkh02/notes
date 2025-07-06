@@ -22,7 +22,7 @@ if not os.environ.get("HF_API_KEY"):
 
 API_URL = "https://router.huggingface.co/hf-inference/models/sentence-transformers/all-MiniLM-L6-v2/pipeline/feature-extraction"
 headers = {
-    "Authorization": f"Bearer {os.environ.get("HF_API_KEY")}",
+    "Authorization": f"Bearer {os.environ.get('HF_API_KEY')}",
 }
 
 def get_embedding_from_text(text):

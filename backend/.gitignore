@@ -1,3 +1,12 @@
-/.env/*
+/.venv/*
 
-.env/*
+.venv/*
+
+.env
+
+# Ignore all __pycache__ directories
+__pycache__/
+
+# Ignore all .pyc and .pyo files
+*.pyc
+*.pyo

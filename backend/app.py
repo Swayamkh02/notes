@@ -32,5 +32,5 @@ def generate_note():
         return jsonify({"error": str(e)}), 500
 
 # if __name__ == "__main__":
-#     app.run(debug=False, port=5500)
+#     app.run(debug=True, port=5500)
 
